@@ -20,7 +20,8 @@
 	<authentication-manager>
 
 		<authentication-provider>
-			<jdbc-user-service data-source-ref="myDataSource" />
+
+
 			<user-service>
 
 				<user name="user"
@@ -31,13 +32,28 @@
 			<password-encoder ref="passwordEncoder"></password-encoder>
 
 		</authentication-provider>
+
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="myDataSource"
+				users-by-username-query="select username,password, enabled from users where username=?"
+				authorities-by-username-query="Select username, user_role from user_roles where username=?" />
+				<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
+		
 	</authentication-manager>
 
 	<b:bean id="passwordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 
 	</b:bean>
-
+<b:bean id="myDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<b:property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver"/>
+		<b:property name="url" value="jdbc:mysql://localhost:3306/hrms" />
+		<b:property name="username" value="hrmsadmin" />
+		<b:property name="password" value="password" />
+	</b:bean>
 
 </b:beans>
 
