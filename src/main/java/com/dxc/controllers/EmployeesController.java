@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dxc.models.Employee;
 import com.dxc.services.EmployeeService;
@@ -42,9 +42,9 @@ public class EmployeesController {
 		return "redirect:/employees";
 	}
 	
-	@GetMapping("/")
-	public String EmployeeDetail(@RequestParam("employeeID") int employeeID, Model model) {
-		Employee employee = employeeService.getEmployeebyId(employeeID);
+	@GetMapping("/{employeeCode}")
+	public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
+		Employee employee = employeeService.getEmployeebyCode(employeeCode);
 		
 		model.addAttribute("employee", employee);
 		return "employeeDetail";

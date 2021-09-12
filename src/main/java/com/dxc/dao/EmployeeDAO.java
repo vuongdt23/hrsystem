@@ -10,4 +10,5 @@ public interface EmployeeDAO {
 	public void saveEmployee(Employee employee);
 	
 	public Employee getEmployeeByID(int ID);
+	public Employee getEmployeeByCode(String employeeCode);
 }

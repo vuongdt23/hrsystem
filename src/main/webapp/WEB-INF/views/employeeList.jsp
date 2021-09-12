@@ -55,9 +55,8 @@
 					<!-- loop over and print our customers -->
 
 					<c:forEach var="e" items="${employeeList}">
-						<c:url var="detail" value="/employees/">
-							<c:param name="employeeID" value="${e.employeeId}">
-							</c:param>
+						<c:url var="detail" value="/employees/${e.employeeCode}">
+							
 						</c:url>
 						<tr>
 							<td>${e.employeeName}</td>

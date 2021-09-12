@@ -18,9 +18,14 @@ public class Employee implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="EMPLOYEE_ID", unique = true)
+	@Column(name="EMPLOYEE_ID") 
 	private int employeeId;
 
+	
+
+	@Column(name="EMPLOYEE_CODE", unique = true, nullable = false)
+	private String employeeCode;
+	
 	@Column(name="EMPLOYEE_ADDRESS")
 	private String employeeAddress;
 
@@ -134,6 +139,13 @@ public class Employee implements Serializable {
 		projects2.setEmployee(this);
 
 		return projects2;
+	}
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
 	}
 
 	public Project removeProjects2(Project projects2) {

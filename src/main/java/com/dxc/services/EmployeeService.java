@@ -10,4 +10,6 @@ public List<Employee> getEmployees();
 public void saveEmployee(Employee employee);
 
 public Employee getEmployeebyId(int Id);
+public Employee getEmployeebyCode(String employeeCode);
+
 }

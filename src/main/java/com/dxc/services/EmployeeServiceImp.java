@@ -33,6 +33,12 @@ public class EmployeeServiceImp implements EmployeeService {
 	public Employee getEmployeebyId(int Id) {
 		return employeeDAO.getEmployeeByID(Id);
 	}
+
+	@Override
+	@Transactional
+	public Employee getEmployeebyCode(String employeeCode) {
+		return employeeDAO.getEmployeeByCode(employeeCode);
+	}
 	
 	
 }
