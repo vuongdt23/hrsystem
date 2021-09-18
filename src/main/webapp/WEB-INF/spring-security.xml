@@ -13,7 +13,7 @@
 
 
 		<intercept-url pattern="/login*" access="isAnonymous()" />
-		<intercept-url pattern="/**" access="isAuthenticated()" />
+		<intercept-url pattern="/employees" access="hasRole('ROLE_ADMIN')"/>
 
 	</http>
 

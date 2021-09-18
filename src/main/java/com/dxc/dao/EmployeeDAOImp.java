@@ -32,7 +32,7 @@ public class EmployeeDAOImp implements EmployeeDAO {
 		// TODO Auto-generated method stub
 		Session currentSession = mySessionFactory.getCurrentSession();
 
-		currentSession.save(employee);
+		currentSession.saveOrUpdate(employee);
 	}
 
 	@Override
@@ -48,6 +48,15 @@ public class EmployeeDAOImp implements EmployeeDAO {
 		Session currentSession = mySessionFactory.getCurrentSession();
 		Employee employee = (Employee) currentSession.createQuery("from Employee s where s.employeeCode = :code").setParameter("code", employeeCode).getSingleResult();
 		return employee;
+	}
+
+	@Override
+	public void deleteEmployeeByCode(String employeeCode) {
+		// TODO Auto-generated method stub
+		Session currentSession = mySessionFactory.getCurrentSession();
+		Employee employee = getEmployeeByCode(employeeCode);
+		currentSession.delete(employee);
+		
 	}
 
 }

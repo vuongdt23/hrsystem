@@ -39,6 +39,13 @@ public class EmployeeServiceImp implements EmployeeService {
 	public Employee getEmployeebyCode(String employeeCode) {
 		return employeeDAO.getEmployeeByCode(employeeCode);
 	}
+
+	@Override
+	@Transactional
+	public void deleteEmployeebyCode(String employeeCode) {
+		// TODO Auto-generated method stub
+		employeeDAO.deleteEmployeeByCode(employeeCode);
+	}
 	
 	
 }

@@ -58,13 +58,20 @@
 						<c:url var="detail" value="/employees/${e.employeeCode}">
 							
 						</c:url>
+						<c:url var="deleteLink" value="/employees/delete">
+							<c:param name="employeeCode" value="${e.employeeCode}"></c:param>
+							
+						</c:url>
+						
 						<tr>
 							<td>${e.employeeName}</td>
 							<td>${e.employeeEmail}</td>
 							<td>${e.employeeAddress}</td>
 							<td>${e.employeePhone}</td>
 
-							<td><a href="${detail}"> Detail </a></td>
+							<td> <a href="${detail}"> Detail </a>
+							|
+							<a href="${deleteLink}"> Delete </a> </td>
 						</tr>
 
 					</c:forEach>

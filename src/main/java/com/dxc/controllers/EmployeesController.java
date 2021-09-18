@@ -42,11 +42,19 @@ public class EmployeesController {
 		return "redirect:/employees";
 	}
 	
+	@GetMapping("/delete")
+	public String deleteEmployee(String employeeCode) {
+	employeeService.deleteEmployeebyCode(employeeCode);
+	return "redirect:/employees";
+	}
+
+	
 	@GetMapping("/{employeeCode}")
 	public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
 		Employee employee = employeeService.getEmployeebyCode(employeeCode);
-		
+		int a = employee.getProjects1().size();
 		model.addAttribute("employee", employee);
+		System.out.print(a);
 		return "employeeDetail";
 	}
 	

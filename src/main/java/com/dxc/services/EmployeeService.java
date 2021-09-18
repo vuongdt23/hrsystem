@@ -12,4 +12,5 @@ public void saveEmployee(Employee employee);
 public Employee getEmployeebyId(int Id);
 public Employee getEmployeebyCode(String employeeCode);
 
+public void deleteEmployeebyCode(String employeeCode);
 }

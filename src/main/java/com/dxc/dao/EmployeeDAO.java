@@ -11,4 +11,6 @@ public interface EmployeeDAO {
 	
 	public Employee getEmployeeByID(int ID);
 	public Employee getEmployeeByCode(String employeeCode);
+	
+	public void deleteEmployeeByCode(String employeeCode);
 }
