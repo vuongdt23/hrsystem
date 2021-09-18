@@ -52,7 +52,7 @@ public class EmployeesController {
 	@GetMapping("/{employeeCode}")
 	public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
 		Employee employee = employeeService.getEmployeebyCode(employeeCode);
-		int a = employee.getProjects1().size();
+		int a = employee.getManageProjects().size();
 		model.addAttribute("employee", employee);
 		System.out.print(a);
 		return "employeeDetail";

@@ -5,58 +5,55 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the employees database table.
  * 
  */
 @Entity
-@Table(name="employees")
-@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
+@Table(name = "employees")
+@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="EMPLOYEE_ID") 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "EMPLOYEE_ID")
 	private int employeeId;
 
-	
-
-	@Column(name="EMPLOYEE_CODE", unique = true, nullable = false)
+	@Column(name = "EMPLOYEE_CODE", unique = true, nullable = false)
 	private String employeeCode;
-	
-	@Column(name="EMPLOYEE_ADDRESS")
+
+	@Column(name = "EMPLOYEE_ADDRESS")
 	private String employeeAddress;
 
-	@Column(name="EMPLOYEE_EMAIL")
+	@Column(name = "EMPLOYEE_EMAIL")
 	private String employeeEmail;
 
-	@Column(name="EMPLOYEE_NAME")
+	@Column(name = "EMPLOYEE_NAME")
 	private String employeeName;
 
-	@Column(name="EMPLOYEE_PHONE")
+	@Column(name = "EMPLOYEE_PHONE")
 	private String employeePhone;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="EMPLOYEE_START_DATE")
+	@Column(name = "EMPLOYEE_START_DATE")
 	private Date employeeStartDate;
 
-	//bi-directional many-to-one association to EmployeePosition
+	// bi-directional many-to-one association to EmployeePosition
 	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_POSITION")
+	@JoinColumn(name = "EMPLOYEE_POSITION")
 	private EmployeePosition employeePositionBean;
 
-	//bi-directional many-to-many association to Project
-	@ManyToMany(mappedBy="employees")
-	private List<Project> projects1;
+	// bi-directional many-to-many association to Project
+	@ManyToMany(mappedBy = "employees")
+	private List<Project> inProjects;
 
-	//bi-directional many-to-one association to Project
-	@OneToMany(mappedBy="employee")
-	private List<Project> projects2;
+	// bi-directional many-to-one association to Project
+	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+	private List<Project> manageProjects;
 
-	//bi-directional many-to-many association to Task
-	@ManyToMany(mappedBy="employees")
+	// bi-directional many-to-many association to Task
+	@ManyToMany(mappedBy = "employees")
 	private List<Task> tasks;
 
 	public Employee() {
@@ -118,28 +115,29 @@ public class Employee implements Serializable {
 		this.employeePositionBean = employeePositionBean;
 	}
 
-	public List<Project> getProjects1() {
-		return this.projects1;
+	public List<Project> getInProjects() {
+		return this.inProjects;
 	}
 
-	public void setProjects1(List<Project> projects1) {
-		this.projects1 = projects1;
+	public void setInProjects(List<Project> inProjects) {
+		this.inProjects = inProjects;
 	}
 
-	public List<Project> getProjects2() {
-		return this.projects2;
+	public List<Project> getManageProjects() {
+		return this.manageProjects;
 	}
 
-	public void setProjects2(List<Project> projects2) {
-		this.projects2 = projects2;
+	public void manageProjects(List<Project> manageProjects) {
+		this.manageProjects = manageProjects;
 	}
 
-	public Project addProjects2(Project projects2) {
-		getProjects2().add(projects2);
-		projects2.setEmployee(this);
+	public Project addManageProject(Project manageProject) {
+		getManageProjects().add(manageProject);
+		manageProject.setEmployee(this);
 
-		return projects2;
+		return manageProject;
 	}
+
 	public String getEmployeeCode() {
 		return employeeCode;
 	}
@@ -148,11 +146,11 @@ public class Employee implements Serializable {
 		this.employeeCode = employeeCode;
 	}
 
-	public Project removeProjects2(Project projects2) {
-		getProjects2().remove(projects2);
-		projects2.setEmployee(null);
+	public Project removeManageProject(Project manageProject) {
+		getManageProjects().remove(manageProject);
+		manageProject.setEmployee(null);
 
-		return projects2;
+		return manageProject;
 	}
 
 	public List<Task> getTasks() {
