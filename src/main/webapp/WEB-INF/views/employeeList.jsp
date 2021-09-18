@@ -1,6 +1,8 @@
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <%@ page isELIgnored="false"%>
-<%@page pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
@@ -30,7 +32,30 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Features</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+				<li class="nav-item">
+				<form:form
+						action="${pageContext.request.contextPath}/logout" method="POST">
+						<input class="btn btn-danger" type="submit" value="Logout" />
+					</form:form></li>
 
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
 
 
@@ -56,22 +81,21 @@
 
 					<c:forEach var="e" items="${employeeList}">
 						<c:url var="detail" value="/employees/${e.employeeCode}">
-							
+
 						</c:url>
 						<c:url var="deleteLink" value="/employees/delete">
 							<c:param name="employeeCode" value="${e.employeeCode}"></c:param>
-							
+
 						</c:url>
-						
+
 						<tr>
 							<td>${e.employeeName}</td>
 							<td>${e.employeeEmail}</td>
 							<td>${e.employeeAddress}</td>
 							<td>${e.employeePhone}</td>
 
-							<td> <a href="${detail}"> Detail </a>
-							|
-							<a href="${deleteLink}"> Delete </a> </td>
+							<td><a href="${detail}"> Detail </a> | <a
+								href="${deleteLink}"> Delete </a></td>
 						</tr>
 
 					</c:forEach>

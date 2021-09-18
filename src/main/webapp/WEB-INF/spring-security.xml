@@ -19,6 +19,7 @@
 			default-target-url="/employees"
 			authentication-failure-url="/login.html?error=true"
 			always-use-default-target="true" />
+			<logout/>
 	</http>
 
 	<authentication-manager>
