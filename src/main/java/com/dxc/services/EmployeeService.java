@@ -9,8 +9,8 @@ public interface EmployeeService {
 public List<Employee> getEmployees();
 public void saveEmployee(Employee employee);
 
-public Employee getEmployeebyId(int Id);
-public Employee getEmployeebyCode(String employeeCode);
+public Employee getEmployeeById(int Id);
+public Employee getEmployeeByCode(String employeeCode);
 
-public void deleteEmployeebyCode(String employeeCode);
+public void deleteEmployeeByCode(String employeeCode);
 }

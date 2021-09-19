@@ -10,6 +10,10 @@
 <h1>To employee list</h1>
 <button type="button" class="btn btn-primary" onClick ="window.location.href='employees'">
 Click here
+
+<h1>To employee list</h1>
+<button type="button" class="btn btn-primary" onClick ="window.location.href='projects'">
+Click here
 </button>
 </body>
 </html>

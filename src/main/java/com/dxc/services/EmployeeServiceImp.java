@@ -30,19 +30,19 @@ public class EmployeeServiceImp implements EmployeeService {
 
 	@Override
 	@Transactional
-	public Employee getEmployeebyId(int Id) {
+	public Employee getEmployeeById(int Id) {
 		return employeeDAO.getEmployeeByID(Id);
 	}
 
 	@Override
 	@Transactional
-	public Employee getEmployeebyCode(String employeeCode) {
+	public Employee getEmployeeByCode(String employeeCode) {
 		return employeeDAO.getEmployeeByCode(employeeCode);
 	}
 
 	@Override
 	@Transactional
-	public void deleteEmployeebyCode(String employeeCode) {
+	public void deleteEmployeeByCode(String employeeCode) {
 		// TODO Auto-generated method stub
 		employeeDAO.deleteEmployeeByCode(employeeCode);
 	}

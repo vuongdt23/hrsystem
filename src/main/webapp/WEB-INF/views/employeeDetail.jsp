@@ -32,80 +32,84 @@
 </head>
 
 <body>
+	<div>
+		<div class="container rounded bg-white mt-5 mb-5">
+			<div class="row">
+				<div class="col-md-3 border-right">
+					<div
+						class="d-flex flex-column align-items-center text-center p-3 py-5">
+						<img class="rounded-circle mt-5" width="150px"
+							src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+							class="font-weight-bold">${employee.employeeName}</span><span
+							class="text-black-50">${employee.employeeEmail}</span><span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-5 border-right">
+					<div class="p-3 py-5">
+						<div
+							class="d-flex justify-content-between align-items-center mb-3">
+							<h4 class="text-right">Profile Settings</h4>
+						</div>
+
+						<form:form modelAttribute="employee" action="saveEmployee">
 
 
+							<div class="col-md-12">
+								<form:label path="employeeName" class="labels">Name</form:label>
 
+								<form:input path="employeeName" type="text" class="form-control"></form:input>
+							</div>
+							<div class="col-md-12">
+								<form:label path="employeeCode" class="labels">Code</form:label>
 
-	<div class="container">
-		<div class="row">
-			<h2>New Employee</h2>
-		</div>
-		<div class="row">
-			<div class="container-fluid px-1 py-5 mx-auto">
-				<div class="row d-flex justify-content-center">
-					<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-						<h3>Add New Employee</h3>
-						<p class="text-primary">Fill in the form to create a new
-							Employee Record</p>
+								<form:input path="employeeCode" type="text" class="form-control"></form:input>
+							</div>
+							<div class="col-md-12">
+								<form:label path="employeePhone" class="labels">Mobile Number</form:label>
 
+								<form:input path="employeePhone" type="text"
+									class="form-control"></form:input>
+							</div>
 
+							<div class="col-md-12">
+								<form:label path="employeeAddress" class="labels">Address</form:label>
 
-						<form:form cssClass="container" method="POST"
-							action="/hr-system/employees/saveEmployee"
-							modelAttribute="employee" class="form-card">
+								<form:input path="employeeAddress" type="text"
+									class="form-control"></form:input>
+							</div>
+							<div class="col-md-12">
+								<form:label path="employeePosition" class="labels">Position</form:label>
 
-							<div class="form-group row form-inline">
+								<form:select  path="employeePosition" class="form-control">
+									<c:forEach items="${positionList}" var="position">
+										<form:option value="${position}">${position.employeePositionName}</form:option>
+									</c:forEach>
+								</form:select>
 
-								<form:label for="nameInput" class="form-label"
-									path="employeeName"> Name: </form:label>
-								<form:input id="nameInput" path="employeeName"
-									class="form-control col-10" />
 
 							</div>
 
 
-							<div class="form-group row form-inline">
-								<form:label for="codeInput" path="employeeCode"
-									class="form-label"> Code:  </form:label>
-								<form:input id="codeInput" path="employeeCode"
-									class="form-control col-10" />
-
+							<div class="mt-5 text-center">
+								<button class="btn btn-primary profile-button" type="submit">Save
+									Profile</button>
 							</div>
-							<div class="form-group row form-inline">
-								<form:label for="emailInput" path="employeeEmail"
-									class="form-label">Email:  </form:label>
-								<form:input id="emailInput" path="employeeEmail"
-									class="form-control col-10" />
-
-							</div>
-							<div class="form-group row form-inline">
-								<form:label for="phoneInput" path="employeePhone"
-									class="form-label">Phone: </form:label>
-								<form:input id="phoneInput" path="employeePhone"
-									class="form-control col-10" />
-
-							</div>
-							<div class="form-group row form-inline">
-								<form:label for="addressInput" path="employeeAddress"
-									class="form-label"> Address</form:label>
-								<form:input id="addressInput" path="employeeAddress"
-									class="form-control col-10" />
-
-							</div>
-
-
-
-							<button type="submit" class="btn-block btn-primary">Add
-								New Employee</button>
 						</form:form>
-
 
 					</div>
 				</div>
+
 			</div>
 		</div>
-
 	</div>
+	</div>
+	</div>
+
+
+
+
+
 
 </body>
 

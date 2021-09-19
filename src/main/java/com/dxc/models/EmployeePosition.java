@@ -27,7 +27,7 @@ public class EmployeePosition implements Serializable {
 	private String employeePositionName;
 
 	//bi-directional many-to-one association to Employee
-	@OneToMany(mappedBy="employeePositionBean")
+	@OneToMany(mappedBy="employeePosition")
 	private List<Employee> employees;
 
 	public EmployeePosition() {
@@ -67,14 +67,14 @@ public class EmployeePosition implements Serializable {
 
 	public Employee addEmployee(Employee employee) {
 		getEmployees().add(employee);
-		employee.setEmployeePositionBean(this);
+		employee.setEmployeePosition(this);
 
 		return employee;
 	}
 
 	public Employee removeEmployee(Employee employee) {
 		getEmployees().remove(employee);
-		employee.setEmployeePositionBean(null);
+		employee.setEmployeePosition(null);
 
 		return employee;
 	}

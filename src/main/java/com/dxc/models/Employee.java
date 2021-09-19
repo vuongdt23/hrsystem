@@ -42,7 +42,7 @@ public class Employee implements Serializable {
 	// bi-directional many-to-one association to EmployeePosition
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_POSITION")
-	private EmployeePosition employeePositionBean;
+	private EmployeePosition employeePosition;
 
 	// bi-directional many-to-many association to Project
 	@ManyToMany(mappedBy = "employees")
@@ -107,14 +107,15 @@ public class Employee implements Serializable {
 		this.employeeStartDate = employeeStartDate;
 	}
 
-	public EmployeePosition getEmployeePositionBean() {
-		return this.employeePositionBean;
+	public EmployeePosition getEmployeePosition() {
+		return this.employeePosition;
 	}
 
-	public void setEmployeePositionBean(EmployeePosition employeePositionBean) {
-		this.employeePositionBean = employeePositionBean;
+	public void setEmployeePosition(EmployeePosition employeePosition) {
+		this.employeePosition = employeePosition;
 	}
-
+	
+	
 	public List<Project> getInProjects() {
 		return this.inProjects;
 	}
