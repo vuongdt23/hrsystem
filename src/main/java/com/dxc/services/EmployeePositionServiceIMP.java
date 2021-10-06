@@ -26,7 +26,6 @@ public class EmployeePositionServiceIMP implements EmployeePositionService {
 	@Override
 	@Transactional
 	public EmployeePosition getPositionById(int id) {
-		// TODO Auto-generated method stub
 		return employeePositionDAO.getPositionById(id);
 	}
 

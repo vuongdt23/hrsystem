@@ -1,4 +1,5 @@
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -199,14 +200,12 @@ a.article, a.article:hover {
 			</div>
 
 			<ul class="list-unstyled components">
-				<p>Dummy Heading</p>
-				<li class="active"><a href="#homeSubmenu"
-					data-toggle="collapse" aria-expanded="false"
-					class="dropdown-toggle">Home</a>
+				<p>Hello</p>
+				<li><a href="#homeSubmenu" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle">Home</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
-						<li><a href="#">Home 1</a></li>
-						<li><a href="#">Home 2</a></li>
-						<li><a href="#">Home 3</a></li>
+
+						<li><a href="#">Tasks</a></li>
 					</ul></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#pageSubmenu" data-toggle="collapse"
@@ -216,47 +215,70 @@ a.article, a.article:hover {
 						<li><a href="#">Page 2</a></li>
 						<li><a href="#">Page 3</a></li>
 					</ul></li>
-				<li><a href="#">Portfolio</a></li>
-				<li><a href="#">Contact</a></li>
+				<li class="active"><a href="projects">Projects</a></li>
+				<li><a href="employees">Employees</a></li>
 			</ul>
 
 			<ul class="list-unstyled CTAs">
-				<li><a
-					href="https://bootstrapious.com/tutorial/files/sidebar.zip"
-					class="download">Download source</a></li>
-				<li><a href="https://bootstrapious.com/p/bootstrap-sidebar"
-					class="article">Back to article</a></li>
+				<form:form action="${pageContext.request.contextPath}/logout"
+					method="POST">
+					<input class="btn btn-danger" type="submit" value="Logout" />
+				</form:form>
 			</ul>
 		</nav>
+		<div class="container">
 
-		<!-- Page Content  -->
-		<div id="content">
 
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
 
-					
-					<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
-						type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="fas fa-align-justify"></i>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="nav navbar-nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="#">Page</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#">Page</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Page</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Page</a></li>
-						</ul>
-					</div>
+			<div id="container">
+				<div class="row">
+					<h2>Employee List</h2>
 				</div>
-			</nav>
+				<div class="row">
 
-			
+
+
+					<table class="table table-dark">
+						<tr>
+							<th>Name</th>
+							
+							<th>Manager</th>
+							<th>Description</th>
+							<th>Tasks</th>
+
+						</tr>
+
+						<!-- loop over and print our customers -->
+
+						<c:forEach var="e" items="${projectList}">
+							<c:url var="detail"
+								value="/employees/${e.manager.getEmployeeCode()}">
+							</c:url>
+
+							<tr>
+								<td>${e.projectId}</td>
+								<td>${e.projectName}</td>
+								<td>${e.projectName}</td>
+								<td><a href="${detail}">${e.manager.getEmployeeName()}</a> 
+
+								</td>
+
+
+
+							</tr>
+
+						</c:forEach>
+
+					</table>
+
+				</div>
+				<div class="row">
+					<button type="button" class="btn btn-primary"
+						onClick="window.location.href='employees/newEmployee'">Add
+						Employee</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

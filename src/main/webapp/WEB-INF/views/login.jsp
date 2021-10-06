@@ -28,7 +28,7 @@
 <body>
 	<div class="jumbotron">
 		<h1 class="display-4">Welcome to your new Human Resource
-			Resolution!</h1>
+			Solution!</h1>
 		<p class="lead">Login with your username and password</p>
 		<hr class="my-4">
 
@@ -54,9 +54,9 @@
 
 		</form:form>
 		<c:if test="${param.error!=null}">
-		<p class ="text-danger">Invalid credentials</p>
+			<p class="text-danger">Invalid credentials</p>
 		</c:if>
-		
+
 	</div>
 </body>
 </html>

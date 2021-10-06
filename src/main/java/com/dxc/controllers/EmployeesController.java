@@ -2,10 +2,7 @@ package com.dxc.controllers;
 
 import java.util.List;
 
-import javax.persistence.Temporal;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,49 +20,65 @@ import com.dxc.services.EmployeeService;
 @RequestMapping("/employees")
 public class EmployeesController {
 
-	@Autowired
-	private EmployeeService employeeService;
+    @Autowired
+    private EmployeeService employeeService;
 
-	@Autowired
-	private EmployeePositionService employeePositionService;
+    @Autowired
+    private EmployeePositionService employeePositionService;
 
-	@GetMapping
-	public String allEmployees(Model model) {
+    @GetMapping
+    public String allEmployees(Model model) {
 
-		List<Employee> employeeList = employeeService.getEmployees();
-		model.addAttribute(employeeList);
-		return "employeeList";
-	}
+        List<Employee> employeeList = employeeService.getEmployees();
+        model.addAttribute(employeeList);
+        return "employeeList";
+    }
 
-	@GetMapping("/newEmployee")
-	public String newEmployeePage(Model model) {
-		Employee employee = new Employee();
-		model.addAttribute("employee", employee);
-		return "newEmployee";
-	}
+    @GetMapping("/newEmployee")
+    public String newEmployeePage(Model model) {
+        List<EmployeePosition> positionList = employeePositionService.getAllPositions();
+        model.addAttribute("positionList", positionList);
 
-	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee employee, @ModelAttribute("employeePositionId") int employeePositionId  ) {
-		EmployeePosition position = employeePositionService.getPositionById(employeePositionId);
-		employee.setEmployeePosition(position);
-		
-		employeeService.saveEmployee(employee);
-		return "redirect:/employees";
-	}
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+        return "newEmployee";
+    }
 
-	@GetMapping("/delete")
-	public String deleteEmployee(String employeeCode) {
-		employeeService.deleteEmployeeByCode(employeeCode);
-		return "redirect:/employees";
-	}
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 
-	@GetMapping("/{employeeCode}")
-	public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
-		Employee employee = employeeService.getEmployeeByCode(employeeCode);
-		List<EmployeePosition> positionList = employeePositionService.getAllPositions();
-		model.addAttribute("employee", employee);
-		model.addAttribute("positionList", positionList);
-		return "employeeDetail";
-	}
+        employeeService.saveEmployee(employee);
+        return "redirect:/employees";
+    }
+
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee) {
+
+        Employee employeeTemp = employeeService.getEmployeeByCode(employee.getEmployeeCode());
+        System.out.print(employeeTemp.getEmployeeName());
+        employeeTemp.setEmployeeCode(employee.getEmployeeCode());
+        employeeTemp.setEmployeeName(employee.getEmployeeName());
+        employeeTemp.setEmployeePhone(employee.getEmployeePhone());
+        employeeTemp.setEmployeePosition(employee.getEmployeePosition());
+        employeeTemp.setEmployeeAddress(employee.getEmployeeAddress());
+        employeeService.updateEmployee(employeeTemp);
+
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(String employeeCode) {
+        employeeService.deleteEmployeeByCode(employeeCode);
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/{employeeCode}")
+    public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
+        Employee employee = employeeService.getEmployeeByCode(employeeCode);
+        List<EmployeePosition> positionList = employeePositionService.getAllPositions();
+        model.addAttribute("employee", employee);
+        model.addAttribute("positionList", positionList);
+        return "employeeDetail";
+    }
 
 }

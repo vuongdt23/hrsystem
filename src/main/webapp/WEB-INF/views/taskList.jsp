@@ -232,42 +232,31 @@ a.article, a.article:hover {
 
 			<div id="container">
 				<div class="row">
-					<h2>Employee List</h2>
+					<h2>Task List</h2>
 				</div>
 				<div class="row">
 
 					<table class="table table-dark">
 						<tr>
-						<th>Id</th>
 							<th>Name</th>
-							<th>Email</th>
-							<th>Address</th>
-							<th>Phone</th>
-							<th>Position</th>
-
+							<th>Urgency</th>
+							<th>Description</th>
+							<th>Priority</th>
+							<th>Project</th>
 						</tr>
 
 						<!-- loop over and print our customers -->
 
-						<c:forEach var="e" items="${employeeList}">
-							<c:url var="detail" value="/employees/${e.employeeCode}">
+						<c:forEach var="e" items="${taskList}">
 
-							</c:url>
-							<c:url var="deleteLink" value="/employees/delete">
-								<c:param name="employeeCode" value="${e.employeeCode}"></c:param>
-
-							</c:url>
 
 							<tr>
-							     <td>${e.employeeId}</td>
-								<td>${e.employeeName}</td>
-								<td>${e.employeeEmail}</td>
-								<td>${e.employeeAddress}</td>
-								<td>${e.employeePhone}</td>
-								<td>${e.employeePosition.getEmployeePositionName()}</td>
+								<td>${e.taskName}</td>
+								<td>${e.taskUrgencyBean.getTaskUrgencyName()}</td>
+								<td>${e.taskDesc}</td>
+								
+                               
 
-								<td><a href="${detail}"> Detail </a> | <a
-									href="${deleteLink}"> Delete </a></td>
 							</tr>
 
 						</c:forEach>

@@ -52,7 +52,7 @@
 							<h4 class="text-right">Profile Settings</h4>
 						</div>
 
-						<form:form modelAttribute="employee" action="saveEmployee">
+						<form:form modelAttribute="employee" action="updateEmployee">
 
 
 							<div class="col-md-12">
@@ -81,9 +81,9 @@
 							<div class="col-md-12">
 								<form:label path="employeePosition" class="labels">Position</form:label>
 
-								<form:select  path="employeePosition" class="form-control">
+								<form:select path="employeePosition" class="form-control">
 									<c:forEach items="${positionList}" var="position">
-										<form:option value="${position}">${position.employeePositionName}</form:option>
+										<form:option value="${position.employeePositionId}">${position.employeePositionName}</form:option>
 									</c:forEach>
 								</form:select>
 

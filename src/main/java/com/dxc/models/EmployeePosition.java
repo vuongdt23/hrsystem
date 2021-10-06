@@ -20,7 +20,11 @@ public class EmployeePosition implements Serializable {
 	@Column(name="EMPLOYEE_POSITION_ID")
 	private int employeePositionId;
 
-	@Column(name="EMPLOYEE_POSITION_DESC")
+	public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    @Column(name="EMPLOYEE_POSITION_DESC")
 	private String employeePositionDesc;
 
 	@Column(name="EMPLOYEE_POSITION_NAME")
@@ -78,5 +82,6 @@ public class EmployeePosition implements Serializable {
 
 		return employee;
 	}
+ 
 
 }

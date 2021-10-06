@@ -12,7 +12,15 @@
 
 	<context:component-scan
 		base-package="com.dxc" />
-	<mvc:annotation-driven />
+		 <!-- Registering conversion service -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+        <list>
+            <bean id="employeePositionConverter" class="com.dxc.converter.EmployeePositionConverter" />
+        </list>
+    </property>
+	</bean>
 	<bean id = "myViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

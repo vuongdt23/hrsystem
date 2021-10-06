@@ -16,7 +16,7 @@
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<form-login login-page='/login.html'
 			login-processing-url="/authenticateUser"
-			default-target-url="/employees"
+			default-target-url="/"
 			authentication-failure-url="/login.html?error=true"
 			always-use-default-target="true" />
 			<logout/>

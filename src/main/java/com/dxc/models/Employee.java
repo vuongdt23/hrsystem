@@ -49,7 +49,7 @@ public class Employee implements Serializable {
 	private List<Project> inProjects;
 
 	// bi-directional many-to-one association to Project
-	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "manager")
 	private List<Project> manageProjects;
 
 	// bi-directional many-to-many association to Task
@@ -59,7 +59,7 @@ public class Employee implements Serializable {
 	public Employee() {
 	}
 
-	public long getEmployeeId() {
+	public int getEmployeeId() {
 		return this.employeeId;
 	}
 
@@ -120,7 +120,15 @@ public class Employee implements Serializable {
 		return this.inProjects;
 	}
 
-	public void setInProjects(List<Project> inProjects) {
+	public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public void setManageProjects(List<Project> manageProjects) {
+        this.manageProjects = manageProjects;
+    }
+
+    public void setInProjects(List<Project> inProjects) {
 		this.inProjects = inProjects;
 	}
 
@@ -134,7 +142,7 @@ public class Employee implements Serializable {
 
 	public Project addManageProject(Project manageProject) {
 		getManageProjects().add(manageProject);
-		manageProject.setEmployee(this);
+		manageProject.setManager(this);
 
 		return manageProject;
 	}
@@ -149,7 +157,7 @@ public class Employee implements Serializable {
 
 	public Project removeManageProject(Project manageProject) {
 		getManageProjects().remove(manageProject);
-		manageProject.setEmployee(null);
+		manageProject.setManager(null);
 
 		return manageProject;
 	}

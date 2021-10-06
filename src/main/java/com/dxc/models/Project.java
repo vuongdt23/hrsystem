@@ -42,7 +42,7 @@ public class Project implements Serializable {
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="PROJECT_MANAGER")
-	private Employee employee;
+	private Employee manager;
 
 	//bi-directional many-to-one association to Task
 	@OneToMany(mappedBy="project")
@@ -83,12 +83,12 @@ public class Project implements Serializable {
 		this.employees = employees;
 	}
 
-	public Employee getEmployee() {
-		return this.employee;
+	public Employee getManager() {
+		return this.manager;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setManager(Employee manager) {
+		this.manager = manager;
 	}
 
 	public List<Task> getTasks() {

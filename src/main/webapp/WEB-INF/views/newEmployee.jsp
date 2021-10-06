@@ -91,6 +91,15 @@
 									class="form-control col-10" />
 
 							</div>
+							 <div class="form-group row form-inline">
+                                <form:label for="addressInput" path="employeeAddress"
+                                    class="form-label"> Address</form:label>
+                                <form:select id="positionComboBox"  items="${positionList}" itemLabel="employeePositionName" itemValue="employeePositionId" path="employeePosition">
+                              
+                                </form:select>
+                                  
+
+                            </div>
 
 
 

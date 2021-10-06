@@ -46,6 +46,13 @@ public class EmployeeServiceImp implements EmployeeService {
 		// TODO Auto-generated method stub
 		employeeDAO.deleteEmployeeByCode(employeeCode);
 	}
+
+    @Override
+    @Transactional
+    public void updateEmployee(Employee employee) {
+        employeeDAO.updateEmployee(employee);
+        
+    }
 	
 	
 }

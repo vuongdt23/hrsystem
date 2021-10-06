@@ -13,4 +13,6 @@ public Employee getEmployeeById(int Id);
 public Employee getEmployeeByCode(String employeeCode);
 
 public void deleteEmployeeByCode(String employeeCode);
+
+public void updateEmployee(Employee employee);
 }
