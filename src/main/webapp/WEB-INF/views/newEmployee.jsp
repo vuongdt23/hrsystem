@@ -58,8 +58,8 @@
 								<form:label for="nameInput" class="form-label"
 									path="employeeName"> Name: </form:label>
 								<form:input id="nameInput" path="employeeName"
-									class="form-control col-10" />
-
+									class="form-control col-7" />
+								<form:errors path="employeeName" cssClass="text-danger col-3"> </form:errors>
 							</div>
 
 
@@ -91,16 +91,7 @@
 									class="form-control col-10" />
 
 							</div>
-							 <div class="form-group row form-inline">
-                                <form:label for="addressInput" path="employeeAddress"
-                                    class="form-label"> Address</form:label>
-                                <form:select id="positionComboBox"  items="${positionList}" itemLabel="employeePositionName" itemValue="employeePositionId" path="employeePosition">
-                              
-                                </form:select>
-                                  
-
-                            </div>
-
+							
 
 
 							<button type="submit" class="btn-block btn-primary">Add

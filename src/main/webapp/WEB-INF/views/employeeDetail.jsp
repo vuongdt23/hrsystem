@@ -78,17 +78,7 @@
 								<form:input path="employeeAddress" type="text"
 									class="form-control"></form:input>
 							</div>
-							<div class="col-md-12">
-								<form:label path="employeePosition" class="labels">Position</form:label>
-
-								<form:select path="employeePosition" class="form-control">
-									<c:forEach items="${positionList}" var="position">
-										<form:option value="${position.employeePositionId}">${position.employeePositionName}</form:option>
-									</c:forEach>
-								</form:select>
-
-
-							</div>
+							
 
 
 							<div class="mt-5 text-center">

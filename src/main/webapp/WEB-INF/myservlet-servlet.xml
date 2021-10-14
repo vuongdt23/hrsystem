@@ -17,7 +17,7 @@
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 	<property name="converters">
         <list>
-            <bean id="employeePositionConverter" class="com.dxc.converter.EmployeePositionConverter" />
+          
         </list>
     </property>
 	</bean>

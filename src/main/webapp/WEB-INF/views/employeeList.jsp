@@ -264,7 +264,7 @@ a.article, a.article:hover {
 								<td>${e.employeeEmail}</td>
 								<td>${e.employeeAddress}</td>
 								<td>${e.employeePhone}</td>
-								<td>${e.employeePosition.getEmployeePositionName()}</td>
+								
 
 								<td><a href="${detail}"> Detail </a> | <a
 									href="${deleteLink}"> Delete </a></td>

@@ -1,9 +1,9 @@
 package com.dxc.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.*;
 
 /**
  * The persistent class for the projects database table.
@@ -16,17 +16,23 @@ public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PROJECT_ID")
 	private int projectId;
+
+	@Column(name="PROJECT_CODE")
+	private String projectCode;
+
+
 
 	@Column(name="PROJECT_DESCR")
 	private String projectDescr;
 
+
+
 	@Column(name="PROJECT_NAME")
 	private String projectName;
 
-	//bi-directional many-to-many association to Employee
+
 	@ManyToMany
 	@JoinTable(
 		name="project_staff"
@@ -39,16 +45,56 @@ public class Project implements Serializable {
 		)
 	private List<Employee> employees;
 
-	//bi-directional many-to-one association to Employee
+
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+
+
+	public Manager getProjectManager() {
+		return projectManager;
+	}
+
+
+
+	public void setProjectManager(Manager projectManager) {
+		this.projectManager = projectManager;
+	}
+
+	//bi-directional many-to-one association to Manager
 	@ManyToOne
 	@JoinColumn(name="PROJECT_MANAGER")
-	private Employee manager;
-
-	//bi-directional many-to-one association to Task
-	@OneToMany(mappedBy="project")
-	private List<Task> tasks;
+	private Manager projectManager;
 
 	public Project() {
+	}
+
+
+
+	public String getProjectCode() {
+		return this.projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+
+
+	public String getProjectDescr() {
+		return this.projectDescr;
+	}
+
+	public void setProjectDescr(String projectDescr) {
+		this.projectDescr = projectDescr;
 	}
 
 	public int getProjectId() {
@@ -59,13 +105,7 @@ public class Project implements Serializable {
 		this.projectId = projectId;
 	}
 
-	public String getProjectDescr() {
-		return this.projectDescr;
-	}
 
-	public void setProjectDescr(String projectDescr) {
-		this.projectDescr = projectDescr;
-	}
 
 	public String getProjectName() {
 		return this.projectName;
@@ -75,42 +115,6 @@ public class Project implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public List<Employee> getEmployees() {
-		return this.employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
-
-	public Employee getManager() {
-		return this.manager;
-	}
-
-	public void setManager(Employee manager) {
-		this.manager = manager;
-	}
-
-	public List<Task> getTasks() {
-		return this.tasks;
-	}
-
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-
-	public Task addTask(Task task) {
-		getTasks().add(task);
-		task.setProject(this);
-
-		return task;
-	}
-
-	public Task removeTask(Task task) {
-		getTasks().remove(task);
-		task.setProject(null);
-
-		return task;
-	}
+	
 
 }

@@ -2,9 +2,15 @@ package com.dxc.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dxc.models.Employee;
-import com.dxc.models.EmployeePosition;
-import com.dxc.services.EmployeePositionService;
 import com.dxc.services.EmployeeService;
 
 @Controller
@@ -23,8 +27,7 @@ public class EmployeesController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private EmployeePositionService employeePositionService;
+    private static Logger LOGGER = LoggerFactory.getLogger(EmployeesController.class);
 
     @GetMapping
     public String allEmployees(Model model) {
@@ -36,8 +39,6 @@ public class EmployeesController {
 
     @GetMapping("/newEmployee")
     public String newEmployeePage(Model model) {
-        List<EmployeePosition> positionList = employeePositionService.getAllPositions();
-        model.addAttribute("positionList", positionList);
 
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
@@ -45,8 +46,16 @@ public class EmployeesController {
     }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+    public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult result) {
 
+    	if(result.hasErrors())
+    	{
+    		for(ObjectError error: result.getAllErrors())
+    		LOGGER.info(error.getDefaultMessage());
+    		
+    		return "newEmployee";
+    	}
+    	
         employeeService.saveEmployee(employee);
         return "redirect:/employees";
     }
@@ -59,7 +68,6 @@ public class EmployeesController {
         employeeTemp.setEmployeeCode(employee.getEmployeeCode());
         employeeTemp.setEmployeeName(employee.getEmployeeName());
         employeeTemp.setEmployeePhone(employee.getEmployeePhone());
-        employeeTemp.setEmployeePosition(employee.getEmployeePosition());
         employeeTemp.setEmployeeAddress(employee.getEmployeeAddress());
         employeeService.updateEmployee(employeeTemp);
 
@@ -75,9 +83,7 @@ public class EmployeesController {
     @GetMapping("/{employeeCode}")
     public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
         Employee employee = employeeService.getEmployeeByCode(employeeCode);
-        List<EmployeePosition> positionList = employeePositionService.getAllPositions();
         model.addAttribute("employee", employee);
-        model.addAttribute("positionList", positionList);
         return "employeeDetail";
     }
 

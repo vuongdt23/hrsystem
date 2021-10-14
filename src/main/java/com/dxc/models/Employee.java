@@ -2,6 +2,9 @@ package com.dxc.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +31,9 @@ public class Employee implements Serializable {
 
 	@Column(name = "EMPLOYEE_EMAIL")
 	private String employeeEmail;
-
+	
+	@NotBlank(message = "Name is required")
+	@Size(max = 50, min = 1, message = "Name is within 50 characters")
 	@Column(name = "EMPLOYEE_NAME")
 	private String employeeName;
 
@@ -39,18 +44,13 @@ public class Employee implements Serializable {
 	@Column(name = "EMPLOYEE_START_DATE")
 	private Date employeeStartDate;
 
-	// bi-directional many-to-one association to EmployeePosition
-	@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_POSITION")
-	private EmployeePosition employeePosition;
+
 
 	// bi-directional many-to-many association to Project
 	@ManyToMany(mappedBy = "employees")
-	private List<Project> inProjects;
+	private List<Project> Projects;
 
-	// bi-directional many-to-one association to Project
-	@OneToMany(mappedBy = "manager")
-	private List<Project> manageProjects;
+	
 
 	// bi-directional many-to-many association to Task
 	@ManyToMany(mappedBy = "employees")
@@ -107,45 +107,15 @@ public class Employee implements Serializable {
 		this.employeeStartDate = employeeStartDate;
 	}
 
-	public EmployeePosition getEmployeePosition() {
-		return this.employeePosition;
-	}
 
-	public void setEmployeePosition(EmployeePosition employeePosition) {
-		this.employeePosition = employeePosition;
-	}
 	
 	
-	public List<Project> getInProjects() {
-		return this.inProjects;
-	}
-
 	public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public void setManageProjects(List<Project> manageProjects) {
-        this.manageProjects = manageProjects;
-    }
-
-    public void setInProjects(List<Project> inProjects) {
-		this.inProjects = inProjects;
-	}
-
-	public List<Project> getManageProjects() {
-		return this.manageProjects;
-	}
-
-	public void manageProjects(List<Project> manageProjects) {
-		this.manageProjects = manageProjects;
-	}
-
-	public Project addManageProject(Project manageProject) {
-		getManageProjects().add(manageProject);
-		manageProject.setManager(this);
-
-		return manageProject;
-	}
+   
+	
 
 	public String getEmployeeCode() {
 		return employeeCode;
@@ -155,12 +125,7 @@ public class Employee implements Serializable {
 		this.employeeCode = employeeCode;
 	}
 
-	public Project removeManageProject(Project manageProject) {
-		getManageProjects().remove(manageProject);
-		manageProject.setManager(null);
 
-		return manageProject;
-	}
 
 	public List<Task> getTasks() {
 		return this.tasks;
@@ -168,6 +133,14 @@ public class Employee implements Serializable {
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public List<Project> getProjects() {
+		return Projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		Projects = projects;
 	}
 
 }
