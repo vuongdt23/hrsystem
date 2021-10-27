@@ -2,7 +2,10 @@ package com.dxc.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import java.util.Date;
@@ -26,9 +29,15 @@ public class Employee implements Serializable {
 	@Column(name = "EMPLOYEE_CODE", unique = true, nullable = false)
 	private String employeeCode;
 
-	@Column(name = "EMPLOYEE_ADDRESS")
+	
+	@Column(name = "EMPLOYEE_ADDRESS", length = 200, nullable = false)
+	@Size(max = 200, message= "Address cannot exceed 200 characters")
+	@NotBlank(message= "Address cannot be empty")
 	private String employeeAddress;
 
+	
+	@NotBlank(message = "Email is required")
+	@Email(message = "Please enter a valid email address")
 	@Column(name = "EMPLOYEE_EMAIL")
 	private String employeeEmail;
 	
@@ -37,9 +46,12 @@ public class Employee implements Serializable {
 	@Column(name = "EMPLOYEE_NAME")
 	private String employeeName;
 
+	@NotBlank(message ="Phone is required")
+	@Pattern(regexp = "^[0-9]*$", message = "Please enter a valid phone number")
 	@Column(name = "EMPLOYEE_PHONE")
 	private String employeePhone;
 
+	@PastOrPresent(message = "Cannot be a future day")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "EMPLOYEE_START_DATE")
 	private Date employeeStartDate;

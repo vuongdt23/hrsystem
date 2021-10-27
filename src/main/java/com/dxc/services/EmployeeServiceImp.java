@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dxc.dao.EmployeeDAO;
 import com.dxc.models.Employee;
+import com.dxc.models.Project;
 
 @Service
 public class EmployeeServiceImp implements EmployeeService {
@@ -53,6 +54,12 @@ public class EmployeeServiceImp implements EmployeeService {
         employeeDAO.updateEmployee(employee);
         
     }
+
+	@Override
+	@Transactional
+	public List<Project> getEmployeeProjects(Employee employee) {
+		return employeeDAO.getEmployeeProjects(employee);
+	}
 	
 	
 }

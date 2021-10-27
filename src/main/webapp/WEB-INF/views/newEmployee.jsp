@@ -50,53 +50,66 @@
 						<div class="card">
 							<h5 class="text-center mb-4">Powering world-class companies</h5>
 							<form:form cssClass="container" method="POST"
-							action="/hr-system/employees/saveEmployee"
-							modelAttribute="employee" class="form-card">
+								action="/hr-system/employees/saveEmployee"
+								modelAttribute="employee" class="form-card">
 
-							<div class="form-group row form-inline">
+								<div class="form-group row form-inline">
 
-								<form:label for="nameInput" class="form-label"
-									path="employeeName"> Name: </form:label>
-								<form:input id="nameInput" path="employeeName"
-									class="form-control col-7" />
-								<form:errors path="employeeName" cssClass="text-danger col-3"> </form:errors>
-							</div>
-
-
-							<div class="form-group row form-inline">
-								<form:label for="codeInput" path="employeeCode"
-									class="form-label"> Code:  </form:label>
-								<form:input id="codeInput" path="employeeCode"
-									class="form-control col-10" />
-
-							</div>
-							<div class="form-group row form-inline">
-								<form:label for="emailInput" path="employeeEmail"
-									class="form-label">Email:  </form:label>
-								<form:input id="emailInput" path="employeeEmail"
-									class="form-control col-10" />
-
-							</div>
-							<div class="form-group row form-inline">
-								<form:label for="phoneInput" path="employeePhone"
-									class="form-label">Phone: </form:label>
-								<form:input id="phoneInput" path="employeePhone"
-									class="form-control col-10" />
-
-							</div>
-							<div class="form-group row form-inline">
-								<form:label for="addressInput" path="employeeAddress"
-									class="form-label"> Address</form:label>
-								<form:input id="addressInput" path="employeeAddress"
-									class="form-control col-10" />
-
-							</div>
-							
+									<form:label for="nameInput" class="form-label col-2"
+										path="employeeName"> Name: </form:label>
+									<form:input id="nameInput" path="employeeName"
+										class="form-control col-8" />
+									<form:errors path="employeeName" cssClass="text-danger col-2">
+									</form:errors>
+								</div>
 
 
-							<button type="submit" class="btn-block btn-primary">Add
-								New Employee</button>
-						</form:form>
+								<div class="form-group row form-inline">
+									<form:label for="codeInput" path="employeeCode"
+										class="form-label col-2"> Code:  </form:label>
+									<form:input id="codeInput" path="employeeCode"
+										class="form-control col-8" />
+
+								</div>
+								<div class="form-group row form-inline">
+									<form:label for="emailInput" path="employeeEmail"
+										class="form-label col-2">Email:  </form:label>
+									<form:input id="emailInput" path="employeeEmail"
+										class="form-control col-8" />
+									<form:errors path="employeeEmail" cssClass="text-danger col-2">
+									</form:errors>
+								</div>
+								<div class="form-group row form-inline">
+									<form:label for="phoneInput" path="employeePhone"
+										class="form-label col-2">Phone: </form:label>
+									<form:input id="phoneInput" path="employeePhone"
+										class="form-control col-8" />
+									<form:errors path="employeePhone" cssClass="text-danger col-2">
+									</form:errors>
+								</div>
+								<div class="form-group row form-inline">
+									<form:label for="addressInput" path="employeeAddress"
+										class="form-label col-2"> Address</form:label>
+									<form:input id="addressInput" path="employeeAddress"
+										class="form-control col-8" />
+									<form:errors path="employeeAddress"
+										cssClass="text-danger col-2">
+									</form:errors>
+								</div>
+								<div class="form-group row form-inline">
+									<form:label for="dateInput" path="employeeStartDate"
+										class="form-label col-2"> Start Date:</form:label>
+									<form:input type="text" cssClass="form-control col-8"
+										path="employeeStartDate" id="datepicker" />
+										<form:errors path="employeeStartDate"
+										cssClass="text-danger col-2">
+									</form:errors>
+								</div>
+
+
+								<button type="submit" class="btn-block btn-primary">Add
+									New Employee</button>
+							</form:form>
 						</div>
 					</div>
 				</div>
@@ -106,7 +119,13 @@
 	</div>
 
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+</script>
 </html>
 
 

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dxc.models.Employee;
+import com.dxc.models.Project;
 import com.dxc.services.EmployeeService;
 
 @Controller
@@ -46,13 +48,14 @@ public class EmployeesController {
     }
 
     @PostMapping("/saveEmployee")
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
     public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult result) {
 
     	if(result.hasErrors())
     	{
     		for(ObjectError error: result.getAllErrors())
     		LOGGER.info(error.getDefaultMessage());
-    		
+    	
     		return "newEmployee";
     	}
     	
@@ -84,6 +87,12 @@ public class EmployeesController {
     public String EmployeeDetail(@PathVariable String employeeCode, Model model) {
         Employee employee = employeeService.getEmployeeByCode(employeeCode);
         model.addAttribute("employee", employee);
+        
+      List<Project> projects =  employeeService.getEmployeeProjects(employee);
+      
+        for(Project p: projects) {
+        	LOGGER.info(p.getProjectName());
+        }
         return "employeeDetail";
     }
 

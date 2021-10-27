@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dxc.models.Employee;
+import com.dxc.models.Project;
 
 @Repository
 public class EmployeeDAOImp implements EmployeeDAO {
@@ -63,5 +64,10 @@ public class EmployeeDAOImp implements EmployeeDAO {
        currentSession.update(employee);
         
     }
+
+	@Override
+	public List<Project> getEmployeeProjects(Employee employee) {
+        Session currentSession = mySessionFactory.getCurrentSession();
+	    currentSession.createQuery("from ")
 
 }

@@ -238,12 +238,11 @@ a.article, a.article:hover {
 
 					<table class="table table-dark">
 						<tr>
-						<th>Id</th>
 							<th>Name</th>
 							<th>Email</th>
 							<th>Address</th>
 							<th>Phone</th>
-							<th>Position</th>
+							<th>Start Date</th>
 
 						</tr>
 
@@ -259,11 +258,11 @@ a.article, a.article:hover {
 							</c:url>
 
 							<tr>
-							     <td>${e.employeeId}</td>
 								<td>${e.employeeName}</td>
 								<td>${e.employeeEmail}</td>
 								<td>${e.employeeAddress}</td>
 								<td>${e.employeePhone}</td>
+								<td>${e.employeeStartDate}</td>
 								
 
 								<td><a href="${detail}"> Detail </a> | <a

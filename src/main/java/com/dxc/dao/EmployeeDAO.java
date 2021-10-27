@@ -3,6 +3,7 @@ package com.dxc.dao;
 import java.util.List;
 
 import com.dxc.models.Employee;
+import com.dxc.models.Project;
 
 public interface EmployeeDAO {
 	public List<Employee> getEmployees();
@@ -15,4 +16,5 @@ public interface EmployeeDAO {
 	public void deleteEmployeeByCode(String employeeCode);
 	
 	public void updateEmployee(Employee employee);
+	public List<Project> getEmployeeProjects(Employee employee);
 }
